@@ -57,8 +57,8 @@ class Genetic:
 
 
 def sum_fitness(gene):
-    return np.array(gene).sum()
+    return sum(gene)
 
-def test(x):
-    return sum([ 1 if c==b else 0 for c, b in zip(x, list("batuhan")) ])
+def hamming_fitness(word):
+    return lambda t: sum([ 1 if c==b else 0 for c, b in zip(t, list(word)) ])
 
