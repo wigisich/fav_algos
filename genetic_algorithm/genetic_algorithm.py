@@ -3,27 +3,29 @@ import numpy as np
 class Genetic:
     def __init__(
             self,
-            population: np.ndarray,
+            alphabet: list[int|str],
             fitness_func,
-            parent_ratio: float, # Probability of selecting a gene from the best parent
-            transfer_ratio: float,
-            mutation_ratio: float,
+            population: list,
+            parent_ratio: float = .7, # Probability of selecting a gene from the best parent
+            transfer_ratio: float = .2,
+            mutation_ratio: float = .2,
             n_generations: int|None = None,
             ):
 
+        self.alphabet = alphabet
+        self.fitness_func = fitness_func
         self.population = population
         self.population_size = len(population)
-        self.n_generations = n_generations
-        self.fitness_func = fitness_func
         self.parent_ratio = parent_ratio
         self.transfer_ratio = transfer_ratio
         self.mutation_ratio = mutation_ratio
+        self.n_generations = n_generations
 
-    def offspring(self, best_fit, second_best_fit, method="cross_over"):
+    def offspring(self, best_fit, second_best_fit):
         return np.array([
                 gene[np.random.choice([0, 1], p=[self.parent_ratio, 1-self.parent_ratio])]
                 if self.mutation_ratio <= np.random.rand()
-                else np.random.randint(0,2)
+                else np.random.choice(self.alphabet)
                 for gene in zip(best_fit, second_best_fit)
                ])
 
@@ -54,8 +56,6 @@ class Genetic:
 def sum_fitness(gene):
     return np.array(gene).sum()
 
-# To test it
-x = Genetic(population=[np.zeros(20) for _ in range(20)], parent_ratio=.6, fitness_func=sum_fitness, transfer_ratio=.2, mutation_ratio=.2, n_generations=16)
-x.evolve()
-
+def test(x):
+    return sum([ 1 if c==b else 0 for c, b in zip(x, list("batuhan")) ])
 
