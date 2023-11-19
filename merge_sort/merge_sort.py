@@ -1,5 +1,5 @@
 # It is easy to merge two sorted arrays. Hence, let's first implement the merge function
-def merge(x, y):
+def merge(x: list[int], y: list[int]) -> list[int]:
     i, j = 0, 0
     merged = []
     while i<len(x) or j<len(y):
@@ -19,7 +19,7 @@ def merge(x, y):
                 break
     return merged
 
-# A simple recursion that sorts any array
+# A simple recursion that sorts any array of integers
 # Note: Python has a recursion limit and it's needed to be changed in order to work with bigger data
 def merge_sort(ls: list[int]) -> list[int]:
     if len(ls) <= 1:
