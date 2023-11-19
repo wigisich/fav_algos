@@ -3,13 +3,13 @@ import numpy as np
 class Genetic:
     def __init__(
             self,
-            alphabet: list[int|str],
-            fitness_func,
-            population: list,
-            parent_ratio: float = .7, # Probability of selecting a gene from the best parent
-            transfer_ratio: float = .2,
-            mutation_ratio: float = .2,
-            n_generations: int|None = None,
+            alphabet: list[int|str],    # The alphabet chromosomes' been coded
+            fitness_func,               # A function that evaluates a single chromosome
+            population: list,           # List of chromosomes
+            parent_ratio: float = .7,   # Probability of selecting a gene from the best parent
+            transfer_ratio: float = .2, # Ratio of transfer of the fittest ones to next generation
+            mutation_ratio: float = .2, # Mutation probability of a single gene during cross over
+            n_generations: int = None,  # Generation number
             ):
 
         self.alphabet = alphabet
@@ -21,6 +21,7 @@ class Genetic:
         self.mutation_ratio = mutation_ratio
         self.n_generations = n_generations
 
+    # After coupling the parents, we choose genes randomly from them with a given mutation ratio to produce offsprings.
     def offspring(self, best_fit, second_best_fit):
         return np.array([
                 gene[np.random.choice([0, 1], p=[self.parent_ratio, 1-self.parent_ratio])]
@@ -32,6 +33,7 @@ class Genetic:
     def sort_fitness(self):
         return sorted(self.population, key=self.fitness_func, reverse=True)
 
+    # This functions selects the best parents and produces the offsprings from them
     def next_generation(self):
         fitness_sorted = self.sort_fitness()
         transfer = np.floor(self.transfer_ratio*self.population_size)
@@ -46,6 +48,7 @@ class Genetic:
 
         self.population = np.stack(new_generation)
 
+    # This function is for iteratively generating the next generations
     def evolve(self):
         if self.n_generations:
             for _ in range(self.n_generations):
