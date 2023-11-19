@@ -3,11 +3,11 @@ import numpy as np
 class Genetic:
     def __init__(
             self,
-            population: list[list[int]],
+            population: np.ndarray,
             fitness_func,
             parent_ratio: float, # Probability of selecting a gene from the best parent
             transfer_ratio: float,
-            mutation_probability: float,
+            mutation_ratio: float,
             n_generations: int|None = None,
             ):
 
@@ -17,12 +17,15 @@ class Genetic:
         self.fitness_func = fitness_func
         self.parent_ratio = parent_ratio
         self.transfer_ratio = transfer_ratio
+        self.mutation_ratio = mutation_ratio
 
     def offspring(self, best_fit, second_best_fit, method="cross_over"):
-        return [
+        return np.array([
                 gene[np.random.choice([0, 1], p=[self.parent_ratio, 1-self.parent_ratio])]
+                if self.mutation_ratio <= np.random.rand()
+                else np.random.randint(0,2)
                 for gene in zip(best_fit, second_best_fit)
-               ]
+               ])
 
     def sort_fitness(self):
         return sorted(self.population, key=self.fitness_func, reverse=True)
@@ -39,12 +42,12 @@ class Genetic:
         while len(new_generation) < self.population_size:
             new_generation.append(self.offspring(best_fit, second_best_fit))
 
-        self.population = new_generation
+        self.population = np.stack(new_generation)
 
     def evolve(self):
         if self.n_generations:
             for _ in range(self.n_generations):
-                print(f"{_}. Generation's fittest: {self.sort_fitness()[0]}")
+                print(f"{_+1}. Generation's fittest: {self.sort_fitness()[0]}")
                 self.next_generation()
 
 
