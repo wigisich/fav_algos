@@ -54,4 +54,8 @@ class Genetic:
 def sum_fitness(gene):
     return np.array(gene).sum()
 
+# To test it
+x = Genetic(population=[np.zeros(20) for _ in range(20)], parent_ratio=.6, fitness_func=sum_fitness, transfer_ratio=.2, mutation_ratio=.2, n_generations=16)
+x.evolve()
+
 
