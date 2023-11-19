@@ -19,7 +19,8 @@ def merge(x, y):
                 break
     return merged
 
-# A simple recursion function to sort any array
+# A simple recursion that sorts any array
+# Note: Python has a recursion limit and it's needed to be changed in order to work with bigger data
 def merge_sort(ls: list[int]) -> list[int]:
     if len(ls) <= 1:
         return ls
