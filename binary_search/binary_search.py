@@ -1,5 +1,5 @@
 def binary_search(item, arr, pointer_low, pointer_high):
-    # The use of pointers here play an important role.
+    # The use of pointers here plays an important role.
     # Because, for example, if we try to declare them inside the recursion, it will create a new search space for each recursive call.
     # This would introduce an unnecessary complexity with the loss of the information about the index we currently are.
 
