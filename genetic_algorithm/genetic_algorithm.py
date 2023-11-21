@@ -55,6 +55,13 @@ class Genetic:
                 print(f"{_+1}. Generation's fittest: {self.sort_fitness()[0]}")
                 self.next_generation()
 
+        else:
+            i = 0
+            while True:
+                self.next_generation()
+                best_fit = self.sort_fitness()[0]
+                print(f"{i}.Generation's fittest: {best_fit}")
+                i += 1
 
 def sum_fitness(gene):
     return sum(gene)
