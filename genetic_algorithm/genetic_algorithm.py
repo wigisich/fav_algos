@@ -55,6 +55,8 @@ class Genetic:
                 print(f"{_+1}. Generation's fittest: {self.sort_fitness()[0]}")
                 self.next_generation()
 
+    # An infinite loop for undefined iteration lengths
+    # Later, this will be modified to detect if the evolution is completed.
         else:
             i = 0
             while True:
@@ -62,6 +64,10 @@ class Genetic:
                 best_fit = self.sort_fitness()[0]
                 print(f"{i}.Generation's fittest: {best_fit}")
                 i += 1
+
+# def graph_fitness
+
+# add variable length chromosome evolution
 
 def sum_fitness(gene):
     return sum(gene)
