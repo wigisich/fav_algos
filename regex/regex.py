@@ -10,6 +10,7 @@ log_lines = [
     '[2023-11-23 20:05:17] WARNING: Some warning about the situation.',
 ]
 
+# A function to format system logs
 def group_format(pattern: str, content: list[str]) -> str:
     for line in content:
         match = pattern.match(line)
@@ -19,7 +20,7 @@ def group_format(pattern: str, content: list[str]) -> str:
         else:
             print(f'Invalid log format: {line}')
 
-# Wil be modified
+# Will be modified to return datetime
 def get_time(content: str|list[str]):
     pattern = "\[.+\]"
     if type(content) == str:
@@ -31,3 +32,6 @@ def get_time(content: str|list[str]):
             r_content.append(extracted_time)
     else:
         print("Check the data type")
+
+
+# This project will include some functions that will work with my procedural formal language generator project.
