@@ -10,13 +10,14 @@ log_lines = [
     '[2023-11-23 20:05:17] WARNING: Some warning about the situation.',
 ]
 
-for log_line in log_lines:
-    match = log_pattern.match(log_line)
-    if match:
-        timestamp, log_level, message = match.groups()
-        print(f'Timestamp: {timestamp}, Level: {log_level}, Message: {message}')
-    else:
-        print(f'Invalid log format: {log_line}')
+def group_format(pattern: str, content: list[str]) -> str:
+    for line in content:
+        match = pattern.match(line)
+        if match:
+            timestamp, level, message = match.groups()
+            print(f'Timestamp: {timestamp}, Level: {level}, Message: {message}')
+        else:
+            print(f'Invalid log format: {line}')
 
 # Wil be modified
 def get_time(content: str|list[str]):
