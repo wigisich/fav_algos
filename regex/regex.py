@@ -32,6 +32,3 @@ def get_time(content: str|list[str]):
             r_content.append(extracted_time)
     else:
         print("Check the data type")
-
-
-# This project will include some functions that will work with my procedural formal language generator project.
