@@ -65,10 +65,6 @@ class Genetic:
                 print(f"{i}.Generation's fittest: {best_fit}")
                 i += 1
 
-# def graph_fitness
-
-# add variable length chromosome evolution
-
 def sum_fitness(gene):
     return sum(gene)
 
@@ -76,10 +72,3 @@ def hamming_fitness(word):
     return lambda t: sum([ 1 if c==b else 0 for c, b in zip(t, list(word)) ])
 
 genetic = Genetic(alphabet=[0,1], population=np.zeros((500,80)), fitness_func=sum_fitness)
-
-# class f needs to have a dimensional properties ( domain -> range ). It will direct the composition of functions.
-# f.domain, f.range
-# fg => f.range == g.domain
-
-
-
